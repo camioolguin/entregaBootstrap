@@ -9,14 +9,13 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
 </head>
 
 
 <body
-  style=" height: 100vh; background:#f5ecdc; 
+  style=" background:#f5ecdc; 
 background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1) 60%, rgba(216,200,168,1) 80%, rgba(202,187,158,1) 100%);">
-  <div id="Container" class="px-sm-5 py-sm-3 text-center">
+  <div id="Container" class="px-sm-5 py-sm-3 ">
     <div id="Header" style="flex: 1 0 0; width: 100%;">
 
       <nav class="navbar navbar-expand-lg navbar-light ">
@@ -42,9 +41,9 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
         </div>
       </nav>
     </div>
-    
-  <div class="card-deck mt-4">
-      <div class="card shadow p-3 mb-5 bg-white rounded">
+
+    <div class="card-deck mt-4 text-center">
+      <div class="card shadow p-3 mb-3 bg-white rounded">
         <h3 class="card-header">MENU A LA OLLA</h3>
         <div class="card-body">
           <h4 class="card-title">$750</h4>
@@ -57,7 +56,7 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
         </div>
       </div>
 
-      <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card shadow p-3 mb-3 bg-white rounded">
         <h3 class="card-header">PLAN FIT PALEO</h3>
         <div class="card-body">
           <h4 class="card-title"> $800 </h4>
@@ -70,7 +69,7 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
         </div>
       </div>
 
-      <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card shadow p-3 mb-3 bg-white rounded">
         <h3 class="card-header">PLAN FIT BASICO</h3>
         <div class="card-body">
           <h4 class="card-title">$650</h4>
@@ -82,8 +81,8 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
           <button type="button" class="btn btn-lg btn-block btn-secondary mt-3 p-1">COMPRAR</button>
         </div>
       </div>
-      
-      <div class="card shadow p-3 mb-5 bg-white rounded">
+
+      <div class="card shadow p-3 mb-3 bg-white rounded">
         <h3 class="card-header">PLAN FIT PLUS TOTAL</h3>
         <div class="card-body">
           <h4 class="card-title">$700</h4>
@@ -95,8 +94,71 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
           <button type="button" class="btn btn-lg btn-block btn-secondary mt-3 p-1">COMPRAR</button>
         </div>
       </div>
+    </div>
+    <div>
+      <h2 class="text-center pt-1 pb-2">Jueguemos!</h2>
+      <form class="text-center" id="form-adivinanza">
+        <div class="form-group">
+          <h5 class="text-center" style="font-family:'Alata'" for="calorias">Ingrese cuantas calorias MÍNIMO se deben
+            consumir en un día</h5>
+          <div class="input-group pl-5 pr-5">
+            <input class="form-control" type="number" name="calorias" id="input-calorias">
+            <div class="input-group-append">
+              <button class="btn btn-secondary rounded" id="btn-submit" type="submit">ENVIAR</button>
+            </div>
+          </div>
+        </div>
+        <span class="text-center alert alert-warning d-none pt-2" id="mensaje"></span>
+      </form>
+    </div>
 
 
+    <script>
+      var correcto = 1500;
+      var intentos = 3;
+      var numero;
+      var mensaje;
+      var form = document.getElementById('form-adivinanza');
+      form.addEventListener('submit', adivinanzaSubmit, true);
+      function adivinanzaSubmit(event) {
+        console.log(intentos);
+
+        event.preventDefault();
+        $('#mensaje').removeClass("d-none");
+        if (intentos != 0) {
+          $('#input-calorias').val();
+          if ($('#input-calorias').val() == correcto) {
+            mensaje = 'Has adivinado! Felicitaciones!';
+            $('#btn-submit').attr('disabled', true);
+          } else {
+            intentos--;
+            if (intentos > 0) {
+
+              mensaje = 'No has adivinado';
+              mensaje += ",te quedan " + intentos + " intentos.";
+
+            } else {
+              mensaje = "Has perdido! :(";
+              $('#btn-submit').html("Intentar de nuevo");
+            }
+          }
+        }
+        else {
+          console.log("ingresando");
+          $('#btn-submit').html("enviar");
+          intentos = 3;
+          mensaje = "";
+        }
+        $('#mensaje').html(mensaje);
+        return false;
+
+      }
+
+
+
+
+
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -111,5 +173,3 @@ background: linear-gradient(160deg, rgba(245,236,220,1) 40%, rgba(231,219,195,1)
 </body>
 
 </html>
-
-   
